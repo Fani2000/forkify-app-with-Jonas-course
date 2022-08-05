@@ -24,6 +24,8 @@ const recipeController = async () => {
 
     recipeView.renderSpinner();
 
+    resultsView.update(getSearchResultsPage());
+
     await loadRecipe(id);
 
     // 2. Rendering the recipe
@@ -69,7 +71,8 @@ const servingsController = newServings => {
   // update the recipe servings (in the state)
   updateServings(newServings);
   // update the recipe view
-  recipeView.render(state.recipe);
+  // recipeView.render(state.recipe);
+  recipeView.update(state.recipe);
 };
 
 const init = () => {
