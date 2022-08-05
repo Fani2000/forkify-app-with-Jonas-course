@@ -28,6 +28,7 @@ export const loadRecipe = async id => {
 
     state.recipe = recipe;
   } catch (error) {
-    alert(error);
+    // alert(error);
+    throw new Error("We couldn't find the recipe, Please try again later!");
   }
 };

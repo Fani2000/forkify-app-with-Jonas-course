@@ -20,11 +20,15 @@ const recipeController = async () => {
     // 2. Rendering the recipe
     recipeView.render(state.recipe);
   } catch (e) {
-    alert(e);
+    // alert(e);
+    recipeView.renderError(e.message);
   }
 };
 
 const init = () => {
+  recipeView.renderMessage(
+    'Start by searching for a recipe or an ingredient. Have fun!'
+  );
   recipeView.addHandlerRender(recipeController);
 };
 
