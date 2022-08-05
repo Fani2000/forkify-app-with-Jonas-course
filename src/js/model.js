@@ -39,6 +39,13 @@ export const loadRecipe = async id => {
   }
 };
 
+export const updateServings = newServings => {
+  state.recipe.ingredients.forEach(ing => {
+    ing.quantity = (ing.quantity * newServings) / state.recipe.servings;
+  });
+  state.recipe.servings = newServings;
+};
+
 export const loadSearchResults = async query => {
   try {
     const url = `${process.env.API_URL}?search=${query}`;

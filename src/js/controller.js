@@ -3,6 +3,7 @@ import 'regenerator-runtime/runtime';
 import {
   getSearchResultsPage,
   loadRecipe,
+  updateServings,
   loadSearchResults,
   state,
 } from './model';
@@ -27,6 +28,9 @@ const recipeController = async () => {
 
     // 2. Rendering the recipe
     recipeView.render(state.recipe);
+
+    // // Test
+    // servingsController();
   } catch (e) {
     // alert(e);
     recipeView.renderError(e.message);
@@ -61,10 +65,18 @@ recipeView.renderMessage(
   'Start by searching for a recipe or an ingredient. Have fun!'
 );
 
+const servingsController = newServings => {
+  // update the recipe servings (in the state)
+  updateServings(newServings);
+  // update the recipe view
+  recipeView.render(state.recipe);
+};
+
 const init = () => {
   searchView.addHandlerSearch(searchedRecipeController);
   paginationView.addHandlerClick(paginationController);
   recipeView.addHandlerRender(recipeController);
+  recipeView.addHandlerUpdateServings(servingsController);
 };
 
 init();
