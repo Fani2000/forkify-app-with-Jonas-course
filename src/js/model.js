@@ -6,6 +6,8 @@ export const state = {
   search: {
     query: '',
     results: [],
+    page: 1,
+    limit: 10,
   },
 };
 
@@ -56,10 +58,19 @@ export const loadSearchResults = async query => {
     });
 
     state.search = {
+      ...state.search,
       query,
       results: recipes,
     };
   } catch (error) {
     throw error;
   }
+};
+
+export const getSearchResultsPage = (page = state.search.page) => {
+  state.search.page = page;
+  const start = (state.search.page - 1) * state.search.limit,
+    end = state.search.page * state.search.limit;
+
+  return state.search.results.slice(start, end);
 };
