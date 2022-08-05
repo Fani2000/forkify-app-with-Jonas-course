@@ -3,6 +3,10 @@ import { getJSON } from './helpers';
 // State for the recipe
 export const state = {
   recipe: {},
+  search: {
+    query: '',
+    results: [],
+  },
 };
 
 // Load the recipe and then update the state for recipe
@@ -30,5 +34,32 @@ export const loadRecipe = async id => {
   } catch (error) {
     // alert(error);
     throw new Error("We couldn't find the recipe, Please try again later!");
+  }
+};
+
+export const loadSearchResults = async query => {
+  try {
+    const url = `${process.env.API_URL}?search=${query}`;
+    const data = await getJSON(url);
+    // console.log(data.data);
+    let {
+      data: { recipes },
+    } = data;
+
+    recipes = recipes.map(rec => {
+      return {
+        id: rec.id,
+        title: rec.title,
+        publisher: rec.publisher,
+        image: rec.image_url,
+      };
+    });
+
+    state.search = {
+      query,
+      results: recipes,
+    };
+  } catch (error) {
+    throw error;
   }
 };
