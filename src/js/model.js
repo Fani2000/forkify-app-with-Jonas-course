@@ -3,6 +3,7 @@ import { getJSON } from './helpers';
 // State for the recipe
 export const state = {
   recipe: {},
+  bookmarks: [],
   search: {
     query: '',
     results: [],
@@ -31,8 +32,10 @@ export const loadRecipe = async id => {
       cookingTime: recipe.cooking_time,
       ingredients: recipe.ingredients,
     };
-
     state.recipe = recipe;
+
+    if (state.bookmarks.some(b => b.id === id)) state.recipe.bookmarked = true;
+    else state.recipe.bookmarked = false;
   } catch (error) {
     // alert(error);
     throw new Error("We couldn't find the recipe, Please try again later!");
@@ -48,6 +51,7 @@ export const updateServings = newServings => {
 
 export const loadSearchResults = async query => {
   try {
+    state.search.page = 1;
     const url = `${process.env.API_URL}?search=${query}`;
     const data = await getJSON(url);
     // console.log(data.data);
@@ -80,4 +84,17 @@ export const getSearchResultsPage = (page = state.search.page) => {
     end = state.search.page * state.search.limit;
 
   return state.search.results.slice(start, end);
+};
+
+export const addBookmark = recipe => {
+  // Add Bookmark
+  state.bookmarks.push(recipe);
+  if (recipe.id === state.recipe.id) state.recipe.bookmarked = true;
+};
+
+export const deleteBookmark = id => {
+  const index = state.bookmarks.findIndex(el => el.id === id);
+  state.bookmarks.splice(index, 1);
+
+  if (id === state.recipe.id) state.recipe.bookmarked = false;
 };
