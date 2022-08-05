@@ -1,0 +1,21 @@
+{
+  "name": "forkify",
+  "version": "1.0.0",
+  "description": "Recipe application",
+  "source": "index.html",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "keywords": [
+    "Recipes"
+  ],
+  "author": "Keorapetse Fani",
+  "license": "ISC",
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.7.0",
+    "os-browserify": "^0.3.0",
+    "parcel": "latest",
+    "path-browserify": "^1.0.1"
+  }
+}
