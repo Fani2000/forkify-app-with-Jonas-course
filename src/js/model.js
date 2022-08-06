@@ -16,7 +16,9 @@ export const state = {
 export const loadRecipe = async id => {
   try {
     const url = `${process.env.API_URL}${id}`;
-    const data = await getJSON(url);
+    const data = await getJSON(
+      url || 'https://forkify-api.herokuapp.com/api/v2/recipes/' + id
+    );
 
     let {
       data: { recipe },
@@ -52,7 +54,9 @@ export const updateServings = newServings => {
 export const loadSearchResults = async query => {
   try {
     state.search.page = 1;
-    const url = `${process.env.API_URL}?search=${query}`;
+    const url = `${
+      process.env.API_URL || 'https://forkify-api.herokuapp.com/api/v2/recipes/'
+    }?search=${query}`;
     const data = await getJSON(url);
     // console.log(data.data);
     let {
