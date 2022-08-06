@@ -21,8 +21,6 @@ export default class View {
     const newDOM = document.createRange().createContextualFragment(newMarkup);
     const newElements = Array.from(newDOM.querySelectorAll('*'));
     const curElements = Array.from(this._parentElement.querySelectorAll('*'));
-    // console.log(newElements);
-    // console.log(curElements);
 
     newElements.forEach((newEl, i) => {
       const curEl = curElements[i];
@@ -60,7 +58,7 @@ export default class View {
     this._parentElement.innerHTML = '';
   }
 
-  renderError = message => {
+  renderError = (message = this._errorMessage) => {
     const markup = `
          <div class="error">
             <div>
@@ -74,7 +72,7 @@ export default class View {
     this._clear();
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
   };
-  renderMessage = message => {
+  renderMessage = (message = this._message) => {
     const markup = `
 <div class="message">
           <div>

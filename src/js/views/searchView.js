@@ -1,5 +1,7 @@
 class SearchView {
   _parentElement = document.querySelector('.search');
+  _errorMessage = 'No results found :)';
+  _message = '';
 
   getQuery = () => {
     const query = this._parentElement.querySelector('.search__field').value;
