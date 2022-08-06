@@ -28,7 +28,6 @@ const recipeController = async () => {
     recipeView.renderSpinner();
 
     resultsView.update(getSearchResultsPage());
-    bookmarksView.update(state.bookmarks);
 
     await loadRecipe(id);
 
@@ -37,6 +36,8 @@ const recipeController = async () => {
 
     // // Test
     // servingsController();
+    // debugger;
+    bookmarksView.update(state.bookmarks);
   } catch (e) {
     // alert(e);
     recipeView.renderError(e.message);
@@ -90,7 +91,12 @@ const addBookmarkController = () => {
   bookmarksView.render(state.bookmarks);
 };
 
+const bookmarksController = () => {
+  bookmarksView.render(state.bookmarks);
+};
+
 const init = () => {
+  bookmarksView.addHandlerRender(bookmarksController);
   searchView.addHandlerSearch(searchedRecipeController);
   paginationView.addHandlerClick(paginationController);
   recipeView.addHandlerRender(recipeController);
