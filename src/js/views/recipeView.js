@@ -4,7 +4,7 @@ import icons from 'url:../../img/icons.svg';
 
 import { Fraction } from 'fractional';
 
-// console.log(new Fraction(0.5).toString());
+console.log(new Fraction(0.5).toString());
 
 class RecipeView extends View {
   _parentElement = document.querySelector('.recipe');

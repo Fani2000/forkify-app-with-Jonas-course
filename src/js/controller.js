@@ -15,10 +15,6 @@ import resultsView from './views/resultsView.js';
 import bookmarksView from './views/bookmarksView.js';
 import paginationView from './views/paginationView.js';
 
-// https://forkify-api.herokuapp.com/v2
-
-if (module.hot) module.hot.accept();
-
 const recipeController = async () => {
   try {
     const id = window.location.hash.slice(1);
