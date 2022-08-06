@@ -2,9 +2,10 @@ import View from './view.js';
 
 import icons from 'url:../../img/icons.svg';
 
-import { Fraction } from 'fractional';
+import fractional from 'fractional';
 
-console.log(new Fraction(0.5).toString());
+// console.log(new Fraction(0.5).toString());
+const Fraction = fractional.Fraction;
 
 class RecipeView extends View {
   _parentElement = document.querySelector('.recipe');
